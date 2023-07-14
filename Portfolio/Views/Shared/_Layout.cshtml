@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Portfolio</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<style>
+    .nav {
+        background-color: #f1f1f1; /* Gray color */
+        padding: 10px; /* Add some padding for spacing */
+    }
+
+      .nav-item {
+        margin: 0 10px; /* Add margin between navigation items */
+    }
+
+    .nav-link {
+        font-size: 20px;
+        color: #333; /* Text color */
+        text-decoration: none; /* Remove underline */
+        transition: color 0.3s ease; /* Add smooth transition for color change */
+    }
+
+    .nav-link:hover {
+        color: #555; /* Hover state color */
+    }
+
+    .nav-item.active {
+        background-color: #ddd; /* Active state background color */
+    }
+
+   .footer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .footer-icons {
+        margin-right: 10px;
+    }
+</style>
+<body>
+    <header>
+        <nav>
+                    <ul class="nav justify-content-center">
+                         <li class="nav-item">
+                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                           </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  asp-area="" asp-controller="Resume" asp-action="Index">Resume</a>
+                             </li>
+                        <li class="nav-item">
+                             <a class="nav-link"  asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
+                          </li>
+                    </ul> 
+           
+        </nav>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="nav justify-content-center">
+        <div class="nav-item">
+           <div class="footer-icons">
+                  <a href="https://github.com/Saurab-1010" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github fa-2x"></i>
+           <a href="https://www.linkedin.com/in/asp-net/" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+           <a href="https://twitter.com/Saurab1010" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-twitter fa-2x"></i>
+        </a>
+        </a>
+        &copy; 2023 -Saurab Portfolio
+        </div>
+
+    </footer>
+
+     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+    window.onload = function() {
+        // Get the current URL path
+        var path = window.location.pathname;
+        
+        // Get all navigation links
+        var navLinks = document.querySelectorAll('.nav-link');
+        
+        // Loop through the links and add the 'active' class to the one that matches the current URL path
+        for (var i = 0; i < navLinks.length; i++) {
+            if (navLinks[i].getAttribute('href') === path) {
+                navLinks[i].parentElement.classList.add('active');
+                break; // Stop the loop once a match is found
+            }
+        }
+    };
+
+</script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
