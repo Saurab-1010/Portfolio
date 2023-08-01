@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Blog Page";
+}
+
+
+<style>
+    /* body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+    }*/
+
+    .containerForm {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    label, input, select {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        margin-top: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    p {
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+</style>
+
+<section id="about" class="about">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Position size calculator</h2>
+            <p></p>
+        </div>
+
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="containerForm">
+                            <h1>Position Sizing Calculator</h1>
+                            <label for="accountBalance">Account Balance ($):</label>
+                            <input type="number" id="accountBalance" min="1" step="1">
+
+                            <label for="riskPercentage">Risk Percentage (%):</label>
+                            <input type="number" id="riskPercentage" min="0.1" step="0.1">
+
+                            <label for="entryPrice">Entry Price ($):</label>
+                            <input type="number" id="entryPrice" min="1" step="0.01">
+
+                            <label for="stopLoss">Stop Loss ($):</label>
+                            <input type="number" id="stopLoss" min="1" step="0.01">
+
+                            <label for="positionType">Position Type:</label>
+                            <select id="positionType">
+                                <option value="long">Long</option>
+                                <option value="short">Short</option>
+                            </select>
+                            <button onclick="calculatePositionSize()">Calculate</button>
+                            <p>Position Size: <span id="positionSize">-</span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</section><!-- End About Section -->
+
+
+<script>
+    function calculatePositionSize() {
+        const accountBalance = parseFloat(document.getElementById('accountBalance').value);
+        const riskPercentage = parseFloat(document.getElementById('riskPercentage').value);
+        const entryPrice = parseFloat(document.getElementById('entryPrice').value);
+        const stopLoss = parseFloat(document.getElementById('stopLoss').value);
+        const positionType = document.getElementById('positionType').value;
+
+        if (isNaN(accountBalance) || isNaN(riskPercentage) || isNaN(stopLoss) || isNaN(entryPrice)) {
+            alert('Please enter valid numbers for all inputs.');
+            return;
+        }
+
+        const riskAmount = (accountBalance * riskPercentage) / 100;
+        let positionSize;
+
+        if (positionType === 'long') {
+            positionSize = Math.floor(riskAmount / (entryPrice - stopLoss));
+        } else if (positionType === 'short') {
+            positionSize = Math.floor(riskAmount / (stopLoss - entryPrice));
+        }
+
+        document.getElementById('positionSize').innerText = positionSize;
+    }
+
+
+</script>
